@@ -1,1 +1,2 @@
-its a snake game
+pong ping
+ping pong
