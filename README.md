@@ -13,5 +13,3 @@ Use arrows up, down, left and right to move in that direction.
 #References 
 https://github.com/techwithtim/Snake-Game
 (used for school)
-
-
