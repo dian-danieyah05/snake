@@ -8,7 +8,7 @@ Download the main source code snake.py, and run the file like a normal '.py' scr
 #Controls
 Use arrows up, down, left and right to move in that direction. 
 #Screenshot
-![Screenshot 2024-07-22 150048](https://github.com/user-attachments/assets/691fcbf4-3e8d-461b-a9c0-8ce120f671e4)
+![Screenshot 2024-07-22 163608](https://github.com/user-attachments/assets/af7c2489-add0-4ae8-b60e-dad9b74b1549)
 
 
 #References 
