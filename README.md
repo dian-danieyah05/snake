@@ -8,8 +8,9 @@ Download the main source code snake.py, and run the file like a normal '.py' scr
 #Controls
 Use arrows up, down, left and right to move in that direction. 
 #Screenshot
-![Screenshot 2024-07-17 161628](https://github.com/user-attachments/assets/e60f1845-9804-4516-bec6-c8c7153f28aa)
+![Screenshot 2024-07-22 150048](https://github.com/user-attachments/assets/691fcbf4-3e8d-461b-a9c0-8ce120f671e4)
+
 
 #References 
-https://github.com/techwithtim/Snake-Game
+Our best friend made this game for us. We love you chatgpt. Saranghae. 
 (used for school)
