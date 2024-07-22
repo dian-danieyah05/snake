@@ -16,8 +16,9 @@ green = (0, 255, 0)
 red = (255, 0, 0)
 
 # Fonts
-font_large = pygame.font.Font(None, 74)
-font_small = pygame.font.Font(None, 36)
+font_large = pygame.font.Font(None, 100)
+font_medium = pygame.font.Font(None, 50)
+font_small = pygame.font.Font(None, 30)
 
 # Set up the display
 screen = pygame.display.set_mode((screen_width, screen_height))
@@ -35,7 +36,7 @@ def starting_screen():
         screen.fill(black)
         
         display_text('Snake Game', font_large, green, (screen_width // 2, screen_height // 2 - 100))
-        display_text('Press any key to start', font_small, red, (screen_width // 2, screen_height // 2 + 100))
+        display_text('Press any key to start', font_medium, red, (screen_width // 2, screen_height // 2 + 120))
         display_text('Instructions:', font_small, white, (screen_width // 2, screen_height // 2 - 20))
         display_text('Use arrow keys to move the snake', font_small, white, (screen_width // 2, screen_height // 2 + 10))
         display_text('Eat the red food to grow', font_small, white, (screen_width // 2, screen_height // 2 + 40))
