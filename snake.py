@@ -28,9 +28,9 @@ pygame.display.set_caption('Snake Game')
 pygame.mixer.init()
 
 # Load sound effects
-start_sound = pygame.mixer.Sound(r'Start_Song.mp3')
-eat_sound = pygame.mixer.Sound(r'Eating_Effect.mp3')
-game_over_sound = pygame.mixer.Sound(r'game over sound effect.mp3')
+start_sound = pygame.mixer.Sound('Start_Song.mp3')
+eat_sound = pygame.mixer.Sound('Eating_Effect.mp3')
+game_over_sound = pygame.mixer.Sound('game over sound effect.mp3')
 
 # Function to display text
 def display_text(text, font, color, center):
