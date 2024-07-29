@@ -12,7 +12,7 @@ screen_height = 480
 # Colors
 white = (255, 255, 255)
 black = (0, 0, 0)
-green = (0, 255, 0)
+green = (0, 255, 0) 
 red = (255, 0, 0)
 
 # Fonts
@@ -24,6 +24,14 @@ font_small = pygame.font.Font(None, 30)
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption('Snake Game')
 
+# Initialize mixer
+pygame.mixer.init()
+
+# Load sound effects
+start_sound = pygame.mixer.Sound(r'c:\Users\norim\Music\IMG_0272.mp3')
+eat_sound = pygame.mixer.Sound(r'c:\Users\norim\Music\Roblox Nom Nom Nom Sound Effect.mp3')
+game_over_sound = pygame.mixer.Sound(r'c:\Users\norim\Music\Arcade game over sound effect!.mp3')
+
 # Function to display text
 def display_text(text, font, color, center):
     text_obj = font.render(text, True, color)
@@ -32,6 +40,7 @@ def display_text(text, font, color, center):
 
 # Starting screen function
 def starting_screen():
+    start_sound.play()  # Play start sound
     while True:
         screen.fill(black)
         
@@ -53,6 +62,7 @@ def starting_screen():
 
 # Ending screen function
 def ending_screen(score):
+    game_over_sound.play()  # Play game over sound
     while True:
         screen.fill(black)
         
@@ -106,6 +116,7 @@ def game():
         
         snake.insert(0, (head_x, head_y))
         if (head_x, head_y) == food_pos:
+            eat_sound.play()  # Play eat sound
             score += 10
             if score % 50 == 0:
                 level += 1
