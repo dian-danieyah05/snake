@@ -12,7 +12,7 @@ screen_height = 480
 # Colors
 white = (255, 255, 255)
 black = (0, 0, 0)
-green = (0, 255, 0) 
+green = (0, 255, 0)
 red = (255, 0, 0)
 
 # Fonts
@@ -28,9 +28,9 @@ pygame.display.set_caption('Snake Game')
 pygame.mixer.init()
 
 # Load sound effects
-start_sound = pygame.mixer.Sound('Start_Song.mp3')
-eat_sound = pygame.mixer.Sound('Eating_Effect.mp3')
-game_over_sound = pygame.mixer.Sound('game over sound effect.mp3')
+start_sound = pygame.mixer.Sound('/Users/norim/Music/Start_Song.mp3')
+eat_sound = pygame.mixer.Sound('/Users/norim/Music/Eating_Effect.mp3')
+game_over_sound = pygame.mixer.Sound('/Users/norim/Music/game over sound effect.mp3')
 
 # Function to display text
 def display_text(text, font, color, center):
