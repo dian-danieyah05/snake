@@ -12,8 +12,11 @@ screen_height = 480
 # Colors
 white = (255, 255, 255)
 black = (0, 0, 0)
-green = (0, 255, 0) 
+green = (0, 255, 0)
 red = (255, 0, 0)
+
+# Wall thickness
+wall_thickness = 20
 
 # Fonts
 font_large = pygame.font.Font(None, 100)
@@ -28,7 +31,7 @@ pygame.display.set_caption('Snake Game')
 pygame.mixer.init()
 
 # Load sound effects
-pygame.mixer.music.load('Start_Song.mp3')
+start_sound = pygame.mixer.Sound('Start_Song.mp3')
 eat_sound = pygame.mixer.Sound('Eating_Effect.mp3')
 game_over_sound = pygame.mixer.Sound('game over sound effect.mp3')
 
@@ -40,7 +43,7 @@ def display_text(text, font, color, center):
 
 # Starting screen function
 def starting_screen():
-    pygame.mixer.music.play(-1)  # Play start song in a loop
+    start_sound.play()  # Play start sound
     while True:
         screen.fill(black)
         
@@ -62,7 +65,6 @@ def starting_screen():
 
 # Ending screen function
 def ending_screen(score):
-    pygame.mixer.music.stop()  # Stop background music
     game_over_sound.play()  # Play game over sound
     while True:
         screen.fill(black)
@@ -88,8 +90,8 @@ def game():
     snake_speed = 10
     snake = [(screen_width // 2, screen_height // 2)]
     snake_direction = pygame.K_RIGHT
-    food_pos = (random.randint(0, (screen_width - snake_size) // snake_size) * snake_size,
-                random.randint(0, (screen_height - snake_size) // snake_size) * snake_size)
+    food_pos = (random.randint(wall_thickness // snake_size, (screen_width - wall_thickness) // snake_size) * snake_size,
+                random.randint(wall_thickness // snake_size, (screen_height - wall_thickness) // snake_size) * snake_size)
     score = 0
     level = 1
     
@@ -112,7 +114,9 @@ def game():
         elif snake_direction == pygame.K_RIGHT:
             head_x += snake_size
         
-        if head_x < 0 or head_x >= screen_width or head_y < 0 or head_y >= screen_height or (head_x, head_y) in snake:
+        # Check for collision with walls
+        if (head_x < wall_thickness or head_x >= screen_width - wall_thickness or 
+            head_y < wall_thickness or head_y >= screen_height - wall_thickness or (head_x, head_y) in snake):
             break
         
         snake.insert(0, (head_x, head_y))
@@ -122,18 +126,26 @@ def game():
             if score % 50 == 0:
                 level += 1
                 snake_speed += 5
-            food_pos = (random.randint(0, (screen_width - snake_size) // snake_size) * snake_size,
-                        random.randint(0, (screen_height - snake_size) // snake_size) * snake_size)
+            food_pos = (random.randint(wall_thickness // snake_size, (screen_width - wall_thickness) // snake_size) * snake_size,
+                        random.randint(wall_thickness // snake_size, (screen_height - wall_thickness) // snake_size) * snake_size)
         else:
             snake.pop()
         
         screen.fill(black)
+        
+        # Draw walls
+        pygame.draw.rect(screen, white, (0, 0, screen_width - 150, wall_thickness))  # Top wall
+        pygame.draw.rect(screen, white, (0, screen_height - wall_thickness, screen_width, wall_thickness))  # Bottom wall
+        pygame.draw.rect(screen, white, (0, 0, wall_thickness, screen_height))  # Left wall
+        pygame.draw.rect(screen, white, (screen_width - wall_thickness, 0, wall_thickness, screen_height))  # Right wall
+        
         for segment in snake:
             pygame.draw.rect(screen, green, (*segment, snake_size, snake_size))
         pygame.draw.rect(screen, red, (*food_pos, snake_size, snake_size))
         
-        display_text(f'Score: {score}', font_small, white, (screen_width - 100, 20))
-        display_text(f'Level: {level}', font_small, white, (screen_width - 100, 50))
+        # Draw the score and level outside the wall
+        display_text(f'Score: {score}', font_small, white, (screen_width - 75, 20))
+        display_text(f'Level: {level}', font_small, white, (screen_width - 75, 50))
         
         pygame.display.flip()
         clock.tick(snake_speed)
