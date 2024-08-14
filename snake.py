@@ -1,3 +1,4 @@
+```python
 import pygame
 import random
 import sys
@@ -34,6 +35,7 @@ pygame.mixer.init()
 start_sound = pygame.mixer.Sound('Start_Song.mp3')
 eat_sound = pygame.mixer.Sound('Eating_Effect.mp3')
 game_over_sound = pygame.mixer.Sound('game over sound effect.mp3')
+pygame.mixer.music.load('Start_Song.mp3')  # Load the music for the game
 
 # Function to display text
 def display_text(text, font, color, center):
@@ -65,6 +67,7 @@ def starting_screen():
 
 # Ending screen function
 def ending_screen(score):
+    pygame.mixer.music.stop()  # Stop the game music
     game_over_sound.play()  # Play game over sound
     while True:
         screen.fill(black)
@@ -90,10 +93,20 @@ def game():
     snake_speed = 10
     snake = [(screen_width // 2, screen_height // 2)]
     snake_direction = pygame.K_RIGHT
-    food_pos = (random.randint(wall_thickness // snake_size, (screen_width - wall_thickness) // snake_size) * snake_size,
-                random.randint(wall_thickness // snake_size, (screen_height - wall_thickness) // snake_size) * snake_size)
+
+    # Calculate valid food positions
+    min_food_x = wall_thickness + snake_size
+    max_food_x = screen_width - wall_thickness - snake_size
+    min_food_y = wall_thickness + snake_size
+    max_food_y = screen_height - wall_thickness - snake_size
+
+    food_pos = (random.randint(min_food_x // snake_size, max_food_x // snake_size) * snake_size,
+                random.randint(min_food_y // snake_size, max_food_y // snake_size) * snake_size)
+    
     score = 0
     level = 1
+
+    pygame.mixer.music.play(loops=-1)  # Start playing the game music, loop indefinitely
     
     while True:
         for event in pygame.event.get():
@@ -126,8 +139,10 @@ def game():
             if score % 50 == 0:
                 level += 1
                 snake_speed += 5
-            food_pos = (random.randint(wall_thickness // snake_size, (screen_width - wall_thickness) // snake_size) * snake_size,
-                        random.randint(wall_thickness // snake_size, (screen_height - wall_thickness) // snake_size) * snake_size)
+            
+            # Recalculate food position
+            food_pos = (random.randint(min_food_x // snake_size, max_food_x // snake_size) * snake_size,
+                        random.randint(min_food_y // snake_size, max_food_y // snake_size) * snake_size)
         else:
             snake.pop()
         
@@ -156,3 +171,4 @@ def game():
 while True:
     starting_screen()
     game()
+```
